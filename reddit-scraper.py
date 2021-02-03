@@ -126,7 +126,7 @@ def get_json_data(JSON_file):
     data = None
     try:
         with open(JSON_file) as f:
-            data = json.loads(f)
+            data = json.loads(f.read())
     except OSError as e:
         print(str(e) + ': Problem loading JSON data')
     return data
