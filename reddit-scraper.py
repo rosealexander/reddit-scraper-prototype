@@ -134,9 +134,9 @@ def get_json_data(JSON_file):
 
 def run():
     # database table and col names we are working with
-    table_name = 'days'
-    table_key_col_name = 'name'
-    table_val_col_name = 'mentions'
+    table_name = 'data'
+    table_key_col_name = 'keys'
+    table_val_col_name = 'values'
 
     # turn on the program flag
     global program_flag
@@ -190,9 +190,9 @@ def run():
     print("Sql connection is good...")
 
     # Create missing tables if needed
-    sql_table_days = '''create table if not exists days (
-    name text primary key unique,
-    mentions integer default 0
+    sql_table_days = '''create table if not exists data (
+    keys text primary key unique,
+    values integer default 0
     );'''
     execute_sql(sql_connection, sql_table_days)
 
