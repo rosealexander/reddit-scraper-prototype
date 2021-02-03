@@ -1,6 +1,6 @@
 import os
 import signal
-from xml.etree import cElementTree
+import json
 from datetime import datetime
 
 # PostgreSQL database adapter
@@ -116,6 +116,22 @@ def print_data(data):
     print('\n'.join(str(e) for e in data))
 
 
+# import JSON data to python dictionary
+def get_json_data(JSON_file):
+    """ print formatted data information
+    :pre JSON data formatted as { Key:"data, ..."}
+    :param JSON_file filepath to JSON data
+    :return JSON dictionary containing key info
+    """
+    data = None
+    try:
+        with open(JSON_file) as f:
+            data = json.loads(f)
+    except OSError as e:
+        print(str(e) + ': Problem loading JSON data')
+    return data
+
+
 def run():
     # database table and col names we are working with
     table_name = 'days'
@@ -154,20 +170,19 @@ def run():
             print(e)
         return cur.lastrowid
 
-    # parse xml document, store data in senators.db and dictionary
-    def days_to_db(conn):
-        days_of_the_week = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
+    # parse key data dictionary, store data in psql.db and mirrored database dictionary
+    def data_to_db(conn, key_data):
         previous_day = None
-        for day in days_of_the_week:
+        for day in key_data['key']:
             try:
-                name_of_day = day.lower()
+                name_of_key = day.lower()
                 # lookup name in db, add if not already present
-                if not record_exist(conn, table_name, table_key_col_name, name_of_day):
-                    add_row(conn, table_name, table_key_col_name, '\'' + name_of_day + '\'')
-                # record the last added day for error reporting
-                previous_day = name_of_day
+                if not record_exist(conn, table_name, table_key_col_name, name_of_key):
+                    add_row(conn, table_name, table_key_col_name, '\'' + name_of_key + '\'')
+                # record the last added key for error reporting
+                previous_day = name_of_key
             except AttributeError as e:
-                print(str(e) + " in days_of_the_week after " + previous_day)
+                print(str(e) + " in key data after " + previous_day)
 
     # Connect to PostgreSQL database
     print("Connecting to db...")
@@ -183,7 +198,7 @@ def run():
 
     # load new data to db
     print("Loading data...")
-    days_to_db(sql_connection)
+    data_to_db(sql_connection)
     print("data loaded...")
 
     # create dictionary to mirror sqlite politicians.db
