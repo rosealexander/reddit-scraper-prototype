@@ -177,7 +177,7 @@ def run():
     # Create missing tables if needed
     sql_table_days = '''create table if not exists days (
     name text primary key unique,
-    mentions integer default 0,
+    mentions integer default 0
     );'''
     execute_sql(sql_connection, sql_table_days)
 
