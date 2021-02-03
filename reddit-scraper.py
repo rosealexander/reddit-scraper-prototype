@@ -190,7 +190,7 @@ def run():
     dictionary = dict()
     data = get_table(sql_connection, table_name)
     # add data to dictionary (name, mentions)
-    for name, _, _ in data:
+    for name, _ in data:
         dictionary[name] = 0
 
     print("searching comments from reddit r/all via reddit.subreddit.stream...")
