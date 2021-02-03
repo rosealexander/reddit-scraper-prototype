@@ -198,7 +198,7 @@ def run():
 
     # load new data to db
     print("Loading data...")
-    data_to_db(sql_connection)
+    data_to_db(sql_connection, get_json_data('data.json'))
     print("data loaded...")
 
     # create dictionary to mirror sqlite politicians.db
