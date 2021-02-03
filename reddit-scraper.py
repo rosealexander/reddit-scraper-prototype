@@ -55,6 +55,7 @@ def add_row(conn, table, col1_name, entry1, col2_name=None, entry2=None):
 # adjust entry information in PostgreSQL db
 def update_record(conn, table, column, key, val):
     """ update entry information in database
+    :pre psql db mush have col named key to search
     :param conn The sql database connection
     :param table  The name of the table
     :param column  The name of the column
@@ -65,7 +66,7 @@ def update_record(conn, table, column, key, val):
     cur = None
     try:
         cur = conn.cursor()
-        cur.execute('update ' + table + ' set ' + column + ' = ' + val + ' where name = \'' + key + '\';')
+        cur.execute('update ' + table + ' set ' + column + ' = ' + val + ' where keys = \'' + key + '\';')
         conn.commit()
     except psycopg2.Error as e:
         print(e)
@@ -204,7 +205,7 @@ def run():
     # create dictionary to mirror sqlite politicians.db
     dictionary = dict()
     data = get_table(sql_connection, table_name)
-    # add data to dictionary (name, mentions)
+    # add data to dictionary (key, value)
     for name, _ in data:
         dictionary[name] = 0
 
