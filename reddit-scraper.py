@@ -125,8 +125,8 @@ def get_json_data(JSON_file):
     """
     data = None
     try:
-        with open(JSON_file) as f:
-            data = json.loads(f.read())
+        with open(JSON_file) as json_file:
+            data = json.load(json_file)
     except OSError as e:
         print(str(e) + ': Problem loading JSON data')
     return data
@@ -172,17 +172,17 @@ def run():
 
     # parse key data dictionary, store data in psql.db and mirrored database dictionary
     def data_to_db(conn, key_data):
-        previous_day = None
-        for day in key_data['key']:
+        previous_key = None
+        for key_name in key_data['key']:
             try:
-                name_of_key = day.lower()
+                name_of_key = key_name.lower()
                 # lookup name in db, add if not already present
                 if not record_exist(conn, table_name, table_key_col_name, name_of_key):
                     add_row(conn, table_name, table_key_col_name, '\'' + name_of_key + '\'')
                 # record the last added key for error reporting
-                previous_day = name_of_key
+                previous_key = name_of_key
             except AttributeError as e:
-                print(str(e) + " in key data after " + previous_day)
+                print(str(e) + " in key data after " + previous_key)
 
     # Connect to PostgreSQL database
     print("Connecting to db...")
