@@ -232,7 +232,7 @@ def run():
                 dictionary[key] = dictionary.get(key) + 1
                 update_record(sql_connection, table_name, table_val_col_name, key, str(dictionary.get(key)))
                 # log new entries to the console
-                print("Name: " + key + ", Mentions: " + str(dictionary.get(key)))
+                print("Key: " + key + ", Data: " + str(dictionary.get(key)))
 
     sql_connection.close()
     print("Closing database connection...")
