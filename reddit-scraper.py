@@ -240,4 +240,5 @@ def run():
     print("Total runtime: " + str(delta))
 
 
-run()
+if __name__ == '__main__':
+    run()
