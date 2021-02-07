@@ -5,10 +5,10 @@ Data is recorded to a [PostgreSQL](https://www.postgresql.org) database via [Her
 
 ## Installation
 
-Use [npm](https://www.npmjs.com) to install.
+Use [Pip](https://pip.pypa.io/en/stable/) to install.
 
 ```bash
-npm install
+pip install
 ```
 
 ## Usage
@@ -16,7 +16,7 @@ npm install
 * Create a new Heroku application.
 * Fork this repo and deploy it to the new Heroku app.
 * Install the Heroku PostgreSQL Add-on.
-* To start, run the free dyno web worker.
+* To start, run the free dyno worker.
 
 ## Tools
 
