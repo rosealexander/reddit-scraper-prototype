@@ -17,6 +17,7 @@ pip install
 * Fork this repo and deploy it to the new Heroku app.
 * Install the Heroku PostgreSQL Add-on.
 * To start, run the free dyno worker.
+#### The list of searched keywords can be found in data.json.
 
 ## Tools
 
