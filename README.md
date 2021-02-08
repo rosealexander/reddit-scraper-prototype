@@ -16,6 +16,7 @@ pip install
 * Create a new Heroku application.
 * Fork this repo and deploy it to the new Heroku app.
 * Install the Heroku PostgreSQL Add-on.
+* To configure [PRAW](https://praw.readthedocs.io/en/latest/), first register a [reddit app](https://www.reddit.com/prefs/apps/). Then, set the env variables CLIENT_ID, CLIENT_SECRET, USER_AGENT via the [Heroku CLI](https://devcenter.heroku.com/articles/config-vars).
 * To start, run the free dyno worker.
 #### The list of searched keywords can be found in data.json.
 
